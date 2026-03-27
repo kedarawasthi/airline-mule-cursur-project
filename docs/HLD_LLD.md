@@ -35,7 +35,57 @@ flowchart TB
     APP --> OBS[Anypoint Monitoring]
 ```
 
-### 1.4 Non-Functional Characteristics
+### 1.4 End-to-End Request Sequence (CRUD)
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant CH2 as CloudHub Ingress
+    participant API as APIKit Main Flow
+    participant Impl as Implementation Flow
+    participant DB as MySQL
+    participant Ext as Notification/External APIs
+
+    Client->>CH2: HTTP /api/flights...
+    CH2->>API: Route request
+    API->>Impl: flow-ref by method/resource
+    Impl->>DB: Query/Insert/Update/Delete
+    Impl-->>Ext: Optional outbound call
+    Impl-->>API: Payload + status vars
+    API-->>Client: Standardized JSON response
+```
+
+### 1.5 Scheduler and Operational Flow Sequence
+
+```mermaid
+sequenceDiagram
+    participant Scheduler
+    participant Ops as scheduledOperationalHeartbeat
+    participant DB as MySQL
+    participant Log as Mule Logger
+    participant Ext as External Logging Endpoint
+
+    Scheduler->>Ops: Trigger every N seconds
+    Ops->>DB: select 1 as ok
+    DB-->>Ops: heartbeat status
+    Ops->>Log: txId + event=ops.heartbeat.success/failure
+    Ops-->>Ext: POST operational log (if enabled)
+```
+
+### 1.6 Batch Processing Design View
+
+```mermaid
+flowchart LR
+    R[POST /api/flights/batch] --> B[postFlightsBatch]
+    B --> S[Split batch records]
+    S --> P[Per-record processing]
+    P --> OK[Success counter]
+    P --> ER[Failure capture store]
+    OK --> RES[Consolidated response]
+    ER --> RES
+```
+
+### 1.7 Non-Functional Characteristics
 
 - Runtime: Mule 4.6.28, Java 17
 - Environment-based configuration (`mule.env=dev`)

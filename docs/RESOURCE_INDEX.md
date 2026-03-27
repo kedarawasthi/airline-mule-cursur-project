@@ -57,6 +57,7 @@ This index catalogs all major project resources, operational artifacts, and gove
 - `tests/local-api-regression.ps1` - Local regression test automation.
 - `postman/american-airlines-info-api.postman_collection.json` - Local/Postman collection.
 - `postman/american-airlines-info-api-cloudhub.postman_collection.json` - CloudHub Postman collection.
+- `postman/american-airlines-info-api-playground.postman_collection.json` - Import-ready, purpose-driven collection with descriptive naming for all services.
 
 ## 8) Generated Reports
 
@@ -74,13 +75,24 @@ This index catalogs all major project resources, operational artifacts, and gove
 - `docs/PROMPT_EXECUTION_LEDGER.md` - Successful prompt ledger, timelines, commands, failures, fixes.
 - `docs/CURSOR_TDLC_METRICS_FILLED.md` - Filled Cursor-specific TDLC metrics from attached matrix.
 - `docs/EXECUTIVE_SCORECARD.md` - Executive one-page scorecard for leadership review.
+- `docs/MASTER_DOCUMENTATION_latest.docx` - Latest lock-safe Word export of full documentation pack.
 
-## 10) Runtime-Only Local Investigation Artifacts
+## 10) Exchange Publication and Documentation Operations
+
+- API spec publish script:
+  - `scripts/publish-api-spec.ps1`
+- Exchange home-page content source:
+  - `exchange-docs/home.md`
+- Exchange home-page publish (API flow):
+  - `PUT /exchange/api/v1/assets/{groupId}/{assetId}/{version}/draft/pages/home`
+  - `PATCH /exchange/api/v1/assets/{groupId}/{assetId}/{version}`
+
+## 11) Runtime-Only Local Investigation Artifacts
 
 - `ch2-logs*/` - CloudHub log downloads used for troubleshooting and verification.
   - Ignored in git (`.gitignore`) to avoid noise and path-length issues.
 
-## 11) Current Operational State Snapshot
+## 12) Current Operational State Snapshot
 
 - CloudHub deployments retained for this scope:
   - `american-airlines-info-app-dev` (actual app, active)

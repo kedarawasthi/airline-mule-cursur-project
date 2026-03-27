@@ -13,13 +13,15 @@ This document captures successful user prompts across this engagement, execution
 ## 2) KT Applied from Prior Agent Streams
 
 - **RAML developer stream KT applied**
-  - Use Design Center project upload flow to keep RAML structure intact.
-  - Publish API spec to Exchange as `rest-api` with explicit versioning.
-  - Maintain RAML + examples + exchange modules together for portability.
+  - Use Design Center project upload flow to keep RAML structure intact and avoid manual drift.
+  - Publish API spec to Exchange as `rest-api` with explicit versioning (`1.0.0` -> `1.0.1`) to avoid immutable-version conflicts.
+  - Maintain RAML + examples + exchange modules together for portability and parser consistency.
+  - Respect Exchange asset-type constraints (`rest-api` vs `app`) during publication workflows.
 - **Mule app developer stream KT applied**
   - Use CloudHub 2 deployment + post-deploy log pull for runtime diagnosis.
   - Verify scheduler and integration flows through runtime log evidence (not just deployment status).
   - Keep environment-specific config pattern: `config-${mule.env}.properties` and secure variant.
+  - Treat standalone runtime and Studio-launched runtime as separate diagnostic modes to isolate local lock/runtime issues.
 
 ## 3) Successful Prompt Ledger
 
@@ -78,7 +80,7 @@ This document captures successful user prompts across this engagement, execution
 
 - `git add .`
 - `git commit ...`
-- `git remote add origin https://github.com/kedarawasthi/test-mule-cursur-project.git`
+- `git remote add origin https://github.com/kedarawasthi/airline-mule-cursur-project.git`
 - `git push -u origin master`
 
 ## 5) Failure Log and Resolutions
@@ -91,8 +93,19 @@ This document captures successful user prompts across this engagement, execution
 | Git `Filename too long` | Deep `exchange_modules` path on Windows | Added ignore entry for exchange_modules and completed commit |
 | DW endpoint transient `500` during shell tests | Escaped JSON payload formatting in inline shell strings | Switched to payload files / correctly escaped bodies; all DW endpoints passed |
 | Existing Exchange version publish conflict (`409`) | Version already published | Published next version (`1.0.1`) successfully |
+| MUnit with Mule standalone runtime repeatedly blocked | Combined issues across EE Maven auth (`401`), runtime/library mismatch, and local process/file locks while trying standalone execution | De-prioritized MUnit execution path for delivery continuity; focused on local/CloudHub functional validation, preserved MUnit artifacts for later stabilization sprint |
+| Exchange docs not visible on asset home page | Asset page `home` remained empty because documentation markdown was not pushed to Exchange page endpoint | Added explicit Exchange page publish step via Exchange API (`draft/pages/home` + asset publish patch) |
 
-## 6) Net Outcome
+## 6) Pain Points and Where Cursor Clearly Lagged
+
+| Area | Pain Point Observed | Impact | Cursor Limitation Noted |
+|---|---|---|---|
+| Enterprise Dependency/Auth | EE artifact auth and repo constraints caused repeated build/test blockers | Delayed MUnit and some module retrieval | Cursor can diagnose quickly, but cannot bypass enterprise credential policies or role/scope limits |
+| APIM Registration | Runtime active but APIM remained `unregistered` in target stream | Governance path not fully closed in same timeline | Cursor can automate checks and retries, but platform-side control-plane issues still require deeper tenant-level support |
+| Windows Runtime/Pathing | File locks and long path limits affected build/git workflows | Slower iteration and commit packaging | Cursor needed workaround steps (short path, excludes), not a native fix |
+| Exchange Asset-Type Rules | `rest-api` vs app-asset publication mismatch created alignment friction | Prevented one-pass "single asset" deploy path | Cursor can detect and explain constraints, but cannot change Exchange type semantics |
+| Standalone MUnit Execution | Local standalone runtime path unstable for reliable MUnit pass in this environment | Reduced automated test closure | Cursor had to shift to functional verification strategy to maintain delivery speed |
+## 7) Net Outcome
 
 - Actual app deployed and running.
 - Minimal troubleshooting artifacts removed.

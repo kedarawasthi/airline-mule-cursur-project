@@ -53,6 +53,15 @@
 | Medium | Long Windows path handling in nested RAML modules | Keep exchange module paths excluded from git where non-essential; package through publish script |
 | Low | Documentation refresh drift over future changes | Re-run `scripts/generate-doc-pack.py` as release checklist step |
 
-## 6) Executive Conclusion
+## 6) Where Cursor Clearly Lags (Observed)
+
+| Domain | Gap | Why it matters |
+|---|---|---|
+| Enterprise auth and repository policy | Cannot bypass organization credential/scope limitations (EE Maven, APIM role scopes) | Repeated blockers in MUnit/EE artifact and platform governance flows |
+| APIM control-plane stabilization | Strong diagnostics but final registration outcome depends on platform-side consistency | Delivery can be functionally complete while governance remains partially open |
+| Local runtime determinism | Standalone runtime + Windows lock/path constraints still require manual environment hygiene | Slows test loops and standalone MUnit reliability |
+| Asset-type governance in Exchange | Cursor can detect constraints but cannot merge incompatible asset types (`rest-api` vs app) | Requires explicit asset strategy decisions by platform governance owners |
+
+## 7) Executive Conclusion
 
 Cursor delivered substantial acceleration across the Mule TDLC lifecycle, especially in build, deployment, runtime operations, and documentation. The project is operationally stable for the actual application and highly documented for handoff. The only significant deferred stream is API Manager registration stabilization, which is isolated and can be tackled as a targeted next phase without blocking current runtime service operations.

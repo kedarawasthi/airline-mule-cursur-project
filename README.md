@@ -54,3 +54,8 @@ Production-style MuleSoft implementation for airline flight operations, DataWeav
   - `config-${mule.env}.properties`
   - `config-${mule.env}-secure.properties`
 - Local CH2 investigation logs are intentionally ignored via `.gitignore`.
+
+## Postman Import (Recommended)
+
+- Primary playground collection (all services, descriptive names/purpose text):
+  - `postman/american-airlines-info-api-playground.postman_collection.json`

@@ -56,8 +56,13 @@ def main() -> None:
             doc.add_heading(section_title, level=1)
             doc.add_paragraph(f"Missing source file: {path}")
 
-    doc.save(target)
-    print(target)
+    try:
+        doc.save(target)
+        print(target)
+    except PermissionError:
+        fallback = docs_dir / "MASTER_DOCUMENTATION_latest.docx"
+        doc.save(fallback)
+        print(fallback)
 
 
 if __name__ == "__main__":

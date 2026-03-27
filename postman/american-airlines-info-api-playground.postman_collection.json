@@ -1,0 +1,427 @@
+{
+  "info": {
+    "name": "American Airlines Info API - Complete Playground",
+    "_postman_id": "3f2d2e4d-3b3e-4d90-a142-2fd688dc8c17",
+    "description": "Import-ready collection for all implemented services in american-airlines-info-app. Request names are purpose-driven, each request includes a clear functional description and cURL reference.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "00 - Setup and Quick Start",
+      "description": "Quick start requests to verify connectivity and discover API resources.",
+      "item": [
+        {
+          "name": "Open API Console (Interactive Docs)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/html"
+              }
+            ],
+            "description": "Purpose: Open APIKit console documentation for the running app.\\n\\nUse when: You want to inspect resources and test from browser-like console.\\n\\ncURL:\\n\\ncurl --request GET '{{baseUrl}}/console/' \\n--header 'Accept: text/html'",
+            "url": {
+              "raw": "{{baseUrl}}/console/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "console",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Smoke Check - Get All Flights",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "description": "Purpose: Confirm API runtime is reachable and returning flight data.\\n\\nUse when: First request after import/deploy.\\n\\ncURL:\\n\\ncurl --request GET '{{baseUrl}}/api/flights' \\n--header 'Accept: application/json'",
+            "url": {
+              "raw": "{{baseUrl}}/api/flights",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "flights"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Query Flights by Destination",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "description": "Purpose: Retrieve flights filtered by destination (`CLE`, `SFO`, `LAX`).\\n\\nUse when: Validating query-based business filtering.\\n\\ncURL:\\n\\ncurl --request GET '{{baseUrl}}/api/flights?destination={{destination}}' \\n--header 'Accept: application/json'",
+            "url": {
+              "raw": "{{baseUrl}}/api/flights?destination={{destination}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "flights"
+              ],
+              "query": [
+                {
+                  "key": "destination",
+                  "value": "{{destination}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "01 - Flights CRUD Services",
+      "description": "Core business operations for flights resource.",
+      "item": [
+        {
+          "name": "Create Flight (POST /api/flights)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "description": "Purpose: Create a new flight record.\\n\\nUse when: Seeding or functional testing create path.\\n\\ncURL:\\n\\ncurl --request POST '{{baseUrl}}/api/flights' \\n--header 'Content-Type: application/json' \\n--data-raw '{\"ID\": 826683, \"code\":\"AA826683\", \"price\":321, \"departureDate\":\"2026-06-01T10:30:00Z\", \"origin\":\"CLE\", \"destination\":\"SFO\", \"emptySeats\":12, \"plane\":{\"type\":\"Boeing 737\", \"totalSeats\":180}}'",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ID\": 826683,\n  \"code\": \"AA826683\",\n  \"price\": 321,\n  \"departureDate\": \"2026-06-01T10:30:00Z\",\n  \"origin\": \"CLE\",\n  \"destination\": \"SFO\",\n  \"emptySeats\": 12,\n  \"plane\": {\n    \"type\": \"Boeing 737\",\n    \"totalSeats\": 180\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/flights",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "flights"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Flight by ID (GET /api/flights/{ID})",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "description": "Purpose: Retrieve one specific flight by ID.\\n\\nUse when: Verifying create/update persistence.\\n\\ncURL:\\n\\ncurl --request GET '{{baseUrl}}/api/flights/{{flightId}}' \\n--header 'Accept: application/json'",
+            "url": {
+              "raw": "{{baseUrl}}/api/flights/{{flightId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "flights",
+                "{{flightId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Flight by ID (PUT /api/flights/{ID})",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "description": "Purpose: Update mutable fields for an existing flight.\\n\\nUse when: Validating update logic and downstream notification trigger path.\\n\\ncURL:\\n\\ncurl --request PUT '{{baseUrl}}/api/flights/{{flightId}}' \\n--header 'Content-Type: application/json' \\n--data-raw '{\"code\":\"AA826683-UPDATED\", \"price\":333, \"departureDate\":\"2026-06-01T11:00:00Z\", \"origin\":\"CLE\", \"destination\":\"SFO\", \"emptySeats\":10, \"plane\":{\"type\":\"Boeing 737 MAX\", \"totalSeats\":180}}'",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"AA826683-UPDATED\",\n  \"price\": 333,\n  \"departureDate\": \"2026-06-01T11:00:00Z\",\n  \"origin\": \"CLE\",\n  \"destination\": \"SFO\",\n  \"emptySeats\": 10,\n  \"plane\": {\n    \"type\": \"Boeing 737 MAX\",\n    \"totalSeats\": 180\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/flights/{{flightId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "flights",
+                "{{flightId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Flight by ID (DELETE /api/flights/{ID})",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "description": "Purpose: Delete an existing flight record.\\n\\nUse when: Validating delete workflow and business checks.\\n\\ncURL:\\n\\ncurl --request DELETE '{{baseUrl}}/api/flights/{{flightId}}' \\n--header 'Accept: application/json'",
+            "url": {
+              "raw": "{{baseUrl}}/api/flights/{{flightId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "flights",
+                "{{flightId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Negative Test - Delete Missing Flight",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "description": "Purpose: Validate not-found delete handling and error contract.\\n\\nUse when: Confirming API returns expected response for missing IDs.\\n\\ncURL:\\n\\ncurl --request DELETE '{{baseUrl}}/api/flights/{{missingFlightId}}' \\n--header 'Accept: application/json'",
+            "url": {
+              "raw": "{{baseUrl}}/api/flights/{{missingFlightId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "flights",
+                "{{missingFlightId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 - Batch Processing Service",
+      "description": "Bulk ingest/upsert workflow for flights.",
+      "item": [
+        {
+          "name": "Batch Upsert Flights (POST /api/flights/batch)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "description": "Purpose: Submit multiple flight records in one call for batch processing.\\n\\nUse when: Validating batch path, partial failure behavior, and summary response.\\n\\ncURL:\\n\\ncurl --request POST '{{baseUrl}}/api/flights/batch' \\n--header 'Content-Type: application/json' \\n--data-raw '[{\"ID\":901001,\"code\":\"AA901001\",\"price\":410,\"departureDate\":\"2026-04-10T08:00:00Z\",\"origin\":\"SFO\",\"destination\":\"LAX\",\"emptySeats\":22,\"plane\":{\"type\":\"Boeing 737\",\"totalSeats\":180}}]'",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"ID\": 901001,\n    \"code\": \"AA901001\",\n    \"price\": 410,\n    \"departureDate\": \"2026-04-10T08:00:00Z\",\n    \"origin\": \"SFO\",\n    \"destination\": \"LAX\",\n    \"emptySeats\": 22,\n    \"plane\": {\n      \"type\": \"Boeing 737\",\n      \"totalSeats\": 180\n    }\n  },\n  {\n    \"ID\": 901002,\n    \"code\": \"AA901002\",\n    \"price\": 520,\n    \"departureDate\": \"2026-04-10T09:30:00Z\",\n    \"origin\": \"CLE\",\n    \"destination\": \"SFO\",\n    \"emptySeats\": 18,\n    \"plane\": {\n      \"type\": \"Airbus A320\",\n      \"totalSeats\": 160\n    }\n  }\n]"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/flights/batch",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "flights",
+                "batch"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 - DataWeave Demo Services",
+      "description": "Standalone DataWeave transformation endpoints for demo and testing.",
+      "item": [
+        {
+          "name": "DW Simple - JSON to JSON",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "description": "Purpose: Demonstrate simple JSON transformation and field normalization.\\n\\nUse when: Verifying simple DataWeave logic quickly.\\n\\ncURL:\\n\\ncurl --request POST '{{baseUrl}}/dw/simple' \\n--header 'Content-Type: application/json' \\n--data-raw '{\"Field1\":\"hello world\",\"phoneNumber\":\"555-123-4567\"}'",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Field1\": \"hello world\",\n  \"phoneNumber\": \"555-123-4567\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/dw/simple",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "dw",
+                "simple"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DW Complex - XML to JSON",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              }
+            ],
+            "description": "Purpose: Transform nested XML payload into JSON shape.\\n\\nUse when: Testing more complex mapping logic for XML source messages.\\n\\ncURL:\\n\\ncurl --request POST '{{baseUrl}}/dw/complex' \\n--header 'Content-Type: application/xml' \\n--data-raw '<orders><order><id>1001</id><amount>120.5</amount></order></orders>'",
+            "body": {
+              "mode": "raw",
+              "raw": "<orders>\n  <order>\n    <id>1001</id>\n    <amount>120.5</amount>\n  </order>\n  <order>\n    <id>1002</id>\n    <amount>45.0</amount>\n  </order>\n</orders>"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/dw/complex",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "dw",
+                "complex"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DW Multi Scenario 1 - JSON to XML",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "description": "Purpose: Convert passenger JSON payload into structured XML output with baggage grouping.\\n\\nUse when: Validating conditional and array-based DataWeave logic.\\n\\ncURL:\\n\\ncurl --request POST '{{baseUrl}}/dw/multi1' \\n--header 'Content-Type: application/json' \\n--data-raw '{\"passengerName\":\"Jane Doe\",\"flightNumber\":\"AA450\",\"travelDate\":\"04/15/2026\"}'",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"passengerName\": \"Jane Doe\",\n  \"flightNumber\": \"AA450\",\n  \"travelDate\": \"04/15/2026\",\n  \"flightClass\": \"Business\",\n  \"baggage\": [\n    {\n      \"id\": \"BAG001\",\n      \"weight\": 22\n    },\n    {\n      \"id\": \"BAG002\",\n      \"weight\": 35\n    },\n    {\n      \"id\": \"BAG003\",\n      \"weight\": 28\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/dw/multi1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "dw",
+                "multi1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DW Multi Scenario 2 - XML to JSON",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              }
+            ],
+            "description": "Purpose: Convert flights XML payload into enriched JSON array and filter cancelled flights.\\n\\nUse when: Validating filtering + formatting transformations.\\n\\ncURL:\\n\\ncurl --request POST '{{baseUrl}}/dw/multi2' \\n--header 'Content-Type: application/xml' \\n--data-raw '<flights><flight><id>FL901</id></flight></flights>'",
+            "body": {
+              "mode": "raw",
+              "raw": "<flights>\n  <flight>\n    <id>FL901</id>\n    <src>JFK</src>\n    <dest>LAX</dest>\n    <deptTime>2026-04-20T14:30</deptTime>\n    <price>650</price>\n    <status>ACTIVE</status>\n  </flight>\n  <flight>\n    <id>FL902</id>\n    <src>ORD</src>\n    <dest>MIA</dest>\n    <deptTime>2026-04-21T09:00</deptTime>\n    <price>380</price>\n    <status>CANCELLED</status>\n  </flight>\n</flights>"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/dw/multi2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "dw",
+                "multi2"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUser}}",
+        "type": "string",
+        "disabled": true
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string",
+        "disabled": true
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://american-airlines-info-app-dev-jjvb3b.5sc6y6-3.usa-e2.cloudhub.io"
+    },
+    {
+      "key": "destination",
+      "value": "SFO"
+    },
+    {
+      "key": "flightId",
+      "value": "826683"
+    },
+    {
+      "key": "missingFlightId",
+      "value": "9999999"
+    },
+    {
+      "key": "basicAuthUser",
+      "value": ""
+    },
+    {
+      "key": "basicAuthPassword",
+      "value": ""
+    }
+  ]
+}

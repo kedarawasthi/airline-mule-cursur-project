@@ -19,6 +19,24 @@ This is the consolidated index and navigation page for the full documentation se
 7. `docs/EXECUTIVE_SCORECARD.md`
    - Presentation-ready one-page leadership summary of Cursor TDLC performance.
 
+## Postman Playbook
+
+- Primary import-ready collection:
+  - `postman/american-airlines-info-api-playground.postman_collection.json`
+- Alternate collections:
+  - `postman/american-airlines-info-api-cloudhub.postman_collection.json`
+  - `postman/american-airlines-info-api.postman_collection.json`
+
+Each request includes purpose-oriented naming and descriptive usage text.
+
+## Exchange Documentation Publication
+
+- Source markdown:
+  - `exchange-docs/home.md`
+- Publish path used:
+  1. Update Exchange draft page `home`
+  2. Publish asset documentation state
+
 ## Operational Verification Snapshot
 
 - Actual app retained and running on CloudHub: `american-airlines-info-app-dev`
@@ -32,5 +50,6 @@ This is the consolidated index and navigation page for the full documentation se
 All above documentation is also consolidated into:
 
 - `docs/MASTER_DOCUMENTATION.docx`
+- `docs/MASTER_DOCUMENTATION_latest.docx` (lock-safe latest export)
 
 This Word file is generated from this documentation set for stakeholder sharing.
