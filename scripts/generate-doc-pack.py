@@ -44,6 +44,8 @@ def main() -> None:
         ("HLD and LLD", docs_dir / "HLD_LLD.md"),
         ("Project Lifecycle and Workflows", docs_dir / "PROJECT_LIFECYCLE_AND_WORKFLOWS.md"),
         ("Prompt Execution Ledger", docs_dir / "PROMPT_EXECUTION_LEDGER.md"),
+        ("Platform Operations Runbook", docs_dir / "PLATFORM_OPERATIONS_RUNBOOK.md"),
+        ("Detailed Regression Test Results", docs_dir / "REGRESSION_TEST_RESULTS_DETAILED.md"),
         ("Cursor TDLC Metrics", docs_dir / "CURSOR_TDLC_METRICS_FILLED.md"),
         ("Executive Scorecard", docs_dir / "EXECUTIVE_SCORECARD.md"),
     ]

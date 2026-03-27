@@ -75,6 +75,8 @@ This index catalogs all major project resources, operational artifacts, and gove
 - `docs/PROJECT_LIFECYCLE_AND_WORKFLOWS.md` - TDLC and workflow implementation narrative.
 - `docs/RESOURCE_INDEX.md` - This file.
 - `docs/PROMPT_EXECUTION_LEDGER.md` - Successful prompt ledger, timelines, commands, failures, fixes.
+- `docs/PLATFORM_OPERATIONS_RUNBOOK.md` - Detailed runbook for asset creation, Design Center sync, API instance/policy operations, and contract/client app handling.
+- `docs/REGRESSION_TEST_RESULTS_DETAILED.md` - Scenario-level regression sheet with input/expected/observed results.
 - `docs/CURSOR_TDLC_METRICS_FILLED.md` - Filled Cursor-specific TDLC metrics from attached matrix.
 - `docs/EXECUTIVE_SCORECARD.md` - Executive one-page scorecard for leadership review.
 - `docs/MASTER_DOCUMENTATION_latest.docx` - Latest lock-safe Word export of full documentation pack.

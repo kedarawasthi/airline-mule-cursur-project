@@ -14,9 +14,13 @@ This is the consolidated index and navigation page for the full documentation se
    - Delivery lifecycle and workflow-level implementation details.
 5. `docs/PROMPT_EXECUTION_LEDGER.md`
    - Successful prompt log, execution windows, commands, and failure resolutions.
-6. `docs/CURSOR_TDLC_METRICS_FILLED.md`
+6. `docs/PLATFORM_OPERATIONS_RUNBOOK.md`
+   - Step-by-step platform runbook for Design Center, Exchange, API instances, policies, and contracts.
+7. `docs/REGRESSION_TEST_RESULTS_DETAILED.md`
+   - Detailed happy/error-path matrix with input, expected output, and observed output.
+8. `docs/CURSOR_TDLC_METRICS_FILLED.md`
    - Filled Cursor matrix for attached TDLC capability/task evaluation sheets.
-7. `docs/EXECUTIVE_SCORECARD.md`
+9. `docs/EXECUTIVE_SCORECARD.md`
    - Presentation-ready one-page leadership summary of Cursor TDLC performance.
 
 ## Postman Playbook
